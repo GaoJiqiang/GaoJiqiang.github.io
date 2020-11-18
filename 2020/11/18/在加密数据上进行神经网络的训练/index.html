@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201118142642144.png?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3d6ZA==,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20201118155633500.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3d6ZA==,size_16,color_FFFFFF,t_70#pic_center">
 <meta property="article:published_time" content="2020-11-18T08:18:06.510Z">
-<meta property="article:modified_time" content="2020-11-18T09:12:14.916Z">
+<meta property="article:modified_time" content="2020-11-18T16:54:52.538Z">
 <meta property="article:author" content="Jiqiang Gao">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201118142642144.png?type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bkc3d6ZA==,size_16,color_FFFFFF,t_70#pic_center">
@@ -305,10 +305,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2020-11-18 16:18:06 / Modified: 17:12:14" itemprop="dateCreated datePublished" datetime="2020-11-18T16:18:06+08:00">2020-11-18</time>
+      <time title="Created: 2020-11-18 16:18:06" itemprop="dateCreated datePublished" datetime="2020-11-18T16:18:06+08:00">2020-11-18</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-11-19 00:54:52" itemprop="dateModified" datetime="2020-11-19T00:54:52+08:00">2020-11-19</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -335,7 +341,7 @@
 <p>在过去一段时间，这种基于HE的机器学习方法逐渐成为研究重点，另一种技术主要是安全多方计算（MPC）。HE非常适合使用深度神经网络进行预测的任务。</p>
 <h2 id="一些应用场景"><a href="#一些应用场景" class="headerlink" title="一些应用场景"></a>一些应用场景</h2><p>数据拥有者（DO）和云模型提供者（Cloud）</p>
 <ol>
-<li>加密的数据，加密的模型：DO将HE加密的数据发送到Cloud。然后，Cloud根据加密数据计算模型以产生加密输出，将输出发送给DO，DO使用私钥对其进行解密。</li>
+<li>加密的数据，未加密的模型：DO将HE加密的数据发送到Cloud。然后，Cloud根据加密数据计算模型以产生加密输出，将输出发送给DO，DO使用私钥对其进行解密。</li>
 <li>未加密的数据，加密的模型：Cloud将已加密的模型发送给DO，然后DO在不现实任何数据的情况下在本地运行模型，以生成加密的输出。DO不会获得任何有关模型的任何信息，并且可以由密钥的所有者（如模型的所有者）解密输出。</li>
 <li>加密数据，加密模型：一个DO或多个DO将数据联合起来输入加密网络进行预测，Cloud返回加密预测结果，需要多个密钥才能解密。类似于联邦学习。</li>
 </ol>
