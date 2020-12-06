@@ -31,8 +31,8 @@
 <meta property="og:site_name" content="G Blog">
 <meta property="og:description" content="Love                                                                                                                                    亲，您使用的浏览器无法支持即将显示的内容，请换成谷歌(Chrome)或者火狐(Firefox)浏览器哟~">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-12-06T07:03:56.222Z">
-<meta property="article:modified_time" content="2020-12-06T07:03:56.222Z">
+<meta property="article:published_time" content="2020-12-06T07:06:50.368Z">
+<meta property="article:modified_time" content="2020-12-06T07:06:50.368Z">
 <meta property="article:author" content="Jiqiang Gao">
 <meta name="twitter:card" content="summary">
 
@@ -446,13 +446,13 @@
         }));
 
         var moveAnimate = eval(Jscex.compile("async", function () {
-            tree.snapshot("p1", 240, 0, 610, 680);
+            tree.snapshot("p1", 240, 0, 650, 680);
             while (tree.move("p1", 500, 0)) {
                 foot.draw();
                 $await(Jscex.Async.sleep(10));
             }
             foot.draw();
-            tree.snapshot("p2", 500, 0, 610, 680);
+            tree.snapshot("p2", 500, 0, 650, 680);
 
             // 会有闪烁不得意这样做, (＞﹏＜)
             canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
