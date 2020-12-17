@@ -24,12 +24,12 @@
     var CONFIG = {"hostname":"gaojiqiang.github.io","root":"/","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","width":250,"display":"always","padding":10,"offset":12,"scrollpercent":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta name="description" content="DemoClick Here 使用方法(Usage) 执行下面的程序，拷贝本项目  $ git clone https:&#x2F;&#x2F;github.com&#x2F;chengjinqian&#x2F;love.git  更改项目文件内容  用文本编辑器打开index.html   写上相对爱人说的话   时间：请修改love.html,第188行，setfullyear设置年月日，然后设置时，分，秒，这里设置的是在一起的开始">
+  <meta name="description" content="DemoClick Here 使用方法(Usage) 执行下面的程序，拷贝本项目  $ git clone https:&#x2F;&#x2F;github.com&#x2F;chengjinqian&#x2F;love.git  更改项目文件内容  用文本编辑器打开index.html 写上相对爱人说的话 时间：请修改love.html,第188行，setfullyear设置年月日，然后设置时，分，秒，这里设置的是在一起的开始时间，程">
 <meta property="og:type" content="website">
 <meta property="og:title" content="G Blog">
 <meta property="og:url" content="https://gaojiqiang.github.io/love/README.html">
 <meta property="og:site_name" content="G Blog">
-<meta property="og:description" content="DemoClick Here 使用方法(Usage) 执行下面的程序，拷贝本项目  $ git clone https:&#x2F;&#x2F;github.com&#x2F;chengjinqian&#x2F;love.git  更改项目文件内容  用文本编辑器打开index.html   写上相对爱人说的话   时间：请修改love.html,第188行，setfullyear设置年月日，然后设置时，分，秒，这里设置的是在一起的开始">
+<meta property="og:description" content="DemoClick Here 使用方法(Usage) 执行下面的程序，拷贝本项目  $ git clone https:&#x2F;&#x2F;github.com&#x2F;chengjinqian&#x2F;love.git  更改项目文件内容  用文本编辑器打开index.html 写上相对爱人说的话 时间：请修改love.html,第188行，setfullyear设置年月日，然后设置时，分，秒，这里设置的是在一起的开始时间，程">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-12-12T01:52:32.978Z">
 <meta property="article:modified_time" content="2020-12-06T06:32:16.138Z">
@@ -307,11 +307,7 @@
 <li><p>更改项目文件内容</p>
 <blockquote>
 <p>用文本编辑器打开index.html</p>
-</blockquote>
-<blockquote>
 <p>写上相对爱人说的话</p>
-</blockquote>
-<blockquote>
 <p>时间：请修改love.html,第188行，setfullyear设置年月日，然后设置时，分，秒，这里设置的是在一起的开始时间，程序会自动计算己有多长时间。</p>
 </blockquote>
 </li>
@@ -412,6 +408,52 @@
 
 
   
+
+  
+      <script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              const target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    const script = document.createElement('script');
+    script.src = '//cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-mml-chtml.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.typesetClear();
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
