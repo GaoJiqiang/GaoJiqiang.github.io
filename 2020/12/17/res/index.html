@@ -50,7 +50,7 @@
 <meta property="og:image" content="https://gaojiqiang.github.io/2020/12/17/res/2020-12-17-17-45-53.png">
 <meta property="og:image" content="https://gaojiqiang.github.io/2020/12/17/res/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB.png">
 <meta property="article:published_time" content="2020-12-17T12:06:03.754Z">
-<meta property="article:modified_time" content="2020-12-17T13:12:47.142Z">
+<meta property="article:modified_time" content="2020-12-17T13:15:10.304Z">
 <meta property="article:author" content="Jiqiang Gao">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gaojiqiang.github.io/2020/12/17/res/2020-12-16-10-36-41.png">
@@ -327,7 +327,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2020-12-17 20:06:03 / Modified: 21:12:47" itemprop="dateCreated datePublished" datetime="2020-12-17T20:06:03+08:00">2020-12-17</time>
+      <time title="Created: 2020-12-17 20:06:03 / Modified: 21:15:10" itemprop="dateCreated datePublished" datetime="2020-12-17T20:06:03+08:00">2020-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -370,7 +370,7 @@
 <blockquote>
 <p>给定输入序列 X={x1,x2,……xT}以及对应的标签数据 Y={y1,y2,……yU}，目的是找到X到Y的一个映射，这种对时序数据进行分类的算法叫做Temporal Classification。</p>
 </blockquote>
-<p>CTC提供了解决方案，对于一个给定的输入序列 X ，CTC给出所有可能的 Y 的输出分布。根据这个分布，我们可以输出最可能的结果或者给出某个输出的概率。 $$Y^*=argmax_yP(Y|X)$$</p>
+<p>CTC提供了解决方案，对于一个给定的输入序列 X ，CTC给出所有可能的 Y 的输出分布。根据这个分布，我们可以输出最可能的结果或者给出某个输出的概率。 $Y^*=argmax_yP(Y|X)$</p>
 <p><strong>1.1 对齐</strong></p>
 <p>在CTC中，多个输出路径会对应一个输出结果，输入X是”CAT”的语音，输出Y是文本[C,A,T],音频做切割后，每个时间片得到一个输出。因此X和Y之间的映射是多对一的，在对齐时要考虑<strong>去重</strong>和引入<strong>空白字符</strong>。</p>
 <ul>
