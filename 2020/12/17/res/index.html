@@ -50,7 +50,7 @@
 <meta property="og:image" content="https://gaojiqiang.github.io/2020/12/17/res/res/2020-12-17-17-45-53.png">
 <meta property="og:image" content="https://gaojiqiang.github.io/2020/12/17/res/res/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB.png">
 <meta property="article:published_time" content="2020-12-17T12:06:03.754Z">
-<meta property="article:modified_time" content="2020-12-17T12:36:02.043Z">
+<meta property="article:modified_time" content="2020-12-17T12:38:32.635Z">
 <meta property="article:author" content="Jiqiang Gao">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gaojiqiang.github.io/2020/12/17/res/res/2020-12-16-10-36-41.png">
@@ -323,7 +323,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2020-12-17 20:06:03 / Modified: 20:36:02" itemprop="dateCreated datePublished" datetime="2020-12-17T20:06:03+08:00">2020-12-17</time>
+      <time title="Created: 2020-12-17 20:06:03 / Modified: 20:38:32" itemprop="dateCreated datePublished" datetime="2020-12-17T20:06:03+08:00">2020-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -399,7 +399,27 @@
 <td>目标语义</td>
 </tr>
 </tbody></table>
-<p><strong>2. speech commands classification</strong><br>|  input  | output  |<br>|  —-  | —-  |<br>| 正常语音+扰动  | 目标分类 |<br>| 正常语音+扰动  | 随机分类 |<br>| 随机噪音+扰动  | 目标分类 |</p>
+<p><strong>2. speech commands classification</strong></p>
+<table>
+<thead>
+<tr>
+<th>input</th>
+<th>output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>正常语音+扰动</td>
+<td>目标分类</td>
+</tr>
+<tr>
+<td>正常语音+扰动</td>
+<td>随机分类</td>
+</tr>
+<tr>
+<td>随机噪音+扰动</td>
+<td>目标分类</td>
+</tr>
+</tbody></table>
 <p>18年之前的工作基本都是基于传统的语音模型（非神经网络）来做的，或是需要生成全新的音频，例如一段音乐隐藏语音指令这种，不能实现类似于图像对抗中与源数据不可区分的效果；</p>
 <blockquote>
 <p><em>Hidden voice commands.<br>Dolphinattack: Inaudible voice commands.<br>Inaudible voice commands.</em> </p>
