@@ -48,9 +48,9 @@
 <meta property="og:image" content="https://gaojiqiang.github.io/2020/12/17/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E8%B0%83%E7%A0%94/2020-12-17-17-03-20.png">
 <meta property="og:image" content="https://gaojiqiang.github.io/2020/12/17/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E8%B0%83%E7%A0%94/2020-12-17-19-48-34.png">
 <meta property="og:image" content="https://gaojiqiang.github.io/2020/12/17/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E8%B0%83%E7%A0%94/2020-12-17-17-45-53.png">
-<meta property="og:image" content="https://gaojiqiang.github.io/2020/12/17/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E8%B0%83%E7%A0%94/语音对抗攻击.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2020/12/17/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E8%B0%83%E7%A0%94/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB.png">
 <meta property="article:published_time" content="2020-12-17T12:06:03.754Z">
-<meta property="article:modified_time" content="2020-12-17T15:38:09.005Z">
+<meta property="article:modified_time" content="2021-01-25T09:57:18.458Z">
 <meta property="article:author" content="Jiqiang Gao">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gaojiqiang.github.io/2020/12/17/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E8%B0%83%E7%A0%94/2020-12-16-10-36-41.png">
@@ -249,7 +249,7 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
@@ -321,17 +321,23 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2020-12-17 20:06:03 / Modified: 23:38:09" itemprop="dateCreated datePublished" datetime="2020-12-17T20:06:03+08:00">2020-12-17</time>
+      <time title="Created: 2020-12-17 20:06:03" itemprop="dateCreated datePublished" datetime="2020-12-17T20:06:03+08:00">2020-12-17</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-01-25 17:57:18" itemprop="dateModified" datetime="2021-01-25T17:57:18+08:00">2021-01-25</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/secure-ML/" itemprop="url" rel="index"><span itemprop="name">secure ML</span></a>
+          <a href="/categories/secure-ML-Audio/" itemprop="url" rel="index"><span itemprop="name">secure ML, Audio</span></a>
         </span>
     </span>
 
@@ -346,7 +352,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="语音对抗调研"><a href="#语音对抗调研" class="headerlink" title="语音对抗调研"></a>语音对抗调研</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>相较于在图像上进行对抗攻击，对语音识别任务进行对抗攻击起步更晚，也更具有挑战性。原因在于语音识别极大依赖于语音信号数据中的频率和时序赖关系，在输入模型识别前需要对语音进行预处理和语音特征提取得到语音频谱图，图像上的对抗攻击可以利用给定可微损失函数的梯度来指导对抗搜索，但是语音上的损失标准一般不可分解，很难用梯度的方法去生成对抗样本。</p>
-<p><img src="2020-12-16-10-36-41.png" alt=""></p>
+<p><img src="2020-12-16-10-36-41.png"></p>
 <p>下面说一下针对语音识别系统对抗攻击的几个标志性工作：</p>
 <p>2015年，Vaidya等人首次尝试针对语音识别系统的扰动攻击，在语音识别系统与处理环节中的特征提取步骤修改输入语音信号，生成人耳无法辨别但能被云隐识别系统正确识别的语音信号，但是实际扰动较大，效果并不好。</p>
 <p>2016年，Calini等人提出了“隐藏语音指令”攻击，设计了基于梯度优化的生成对抗扰动的方法，为了在音频信号特征提取后依然保持对抗性，采用了逆语音特征提取的方法反向得到音频信号。但同样容易被人耳感知。</p>
@@ -355,13 +361,13 @@
 <p>ps：2018年之前的工作不能称为真正意义上的对抗性样本，因为生成的音频对原始语音的扰动太大，人很容易意识到语音被篡改，并且攻击的语音模型不是基于深度学习训练得到的。</p>
 <h2 id="深度学习语音识别框架"><a href="#深度学习语音识别框架" class="headerlink" title="深度学习语音识别框架"></a>深度学习语音识别框架</h2><h3 id="1-end-to-end语音识别模型"><a href="#1-end-to-end语音识别模型" class="headerlink" title="1. end-to-end语音识别模型"></a>1. end-to-end语音识别模型</h3><p>输入一段.wav格式的音频识别步骤：</p>
 <blockquote>
-<p>1）预处理：会进行解码、降噪等操作，把音频分成较短的帧；\<br>2）特征提取：从短帧中提取声学特征，常用MFCC特征(梅尔倒谱系数);\<br>3）基于模型的预测：将声学特征作为输入数据，生成预测结果，主流系统通常使用RNNs+CTC损失函数模型<br><img src="2020-12-15-11-00-49.png" alt=""></p>
+<p>1）预处理：会进行解码、降噪等操作，把音频分成较短的帧；<br>2）特征提取：从短帧中提取声学特征，常用MFCC特征(梅尔倒谱系数);<br>3）基于模型的预测：将声学特征作为输入数据，生成预测结果，主流系统通常使用RNNs+CTC损失函数模型<br><img src="2020-12-15-11-00-49.png"></p>
 </blockquote>
-<p>这里有两个地方需要进行了解:\<br>一个是<strong>CTC</strong>函数，是一种声学模型，CTC-Loss函数，在设计语音对抗样本Loss函数时可能需要用到；一个是<strong>MFCC</strong>，了解语音信息的特征提取过程，便于设计对抗生成方法。</p>
+<p>这里有两个地方需要进行了解:<br>一个是<strong>CTC</strong>函数，是一种声学模型，CTC-Loss函数，在设计语音对抗样本Loss函数时可能需要用到；一个是<strong>MFCC</strong>，了解语音信息的特征提取过程，便于设计对抗生成方法。</p>
 <h3 id="2-基于分类的语音系统"><a href="#2-基于分类的语音系统" class="headerlink" title="2. 基于分类的语音系统"></a>2. 基于分类的语音系统</h3><blockquote>
-<p>1）预处理：同上；\<br>2）特征提取：一般用CNNs提取audio-level feature和frame-level feature\<br>3）基于模型的预测：将声学特征作为输入数据，生成预测结果，模型通常用CNNs<br><img src="2020-12-15-17-05-48.png" alt=""></p>
+<p>1）预处理：同上；<br>2）特征提取：一般用CNNs提取audio-level feature和frame-level feature<br>3）基于模型的预测：将声学特征作为输入数据，生成预测结果，模型通常用CNNs<br><img src="2020-12-15-17-05-48.png"></p>
 </blockquote>
-<h3 id="3-目前各公司使用的一些语音识别系统："><a href="#3-目前各公司使用的一些语音识别系统：" class="headerlink" title="3.目前各公司使用的一些语音识别系统："></a>3.目前各公司使用的一些语音识别系统：</h3><p><img src="2020-12-15-11-39-50.png" alt=""></p>
+<h3 id="3-目前各公司使用的一些语音识别系统："><a href="#3-目前各公司使用的一些语音识别系统：" class="headerlink" title="3.目前各公司使用的一些语音识别系统："></a>3.目前各公司使用的一些语音识别系统：</h3><p><img src="2020-12-15-11-39-50.png"></p>
 <h2 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h2><h3 id="1-CTC"><a href="#1-CTC" class="headerlink" title="1. CTC"></a>1. CTC</h3><p>CTC是一种RNN的端到端训练方法，可以让RNN直接对序列数据进行学习，而无需事先标注好训练数据中输入序列和输出序列的映射关系。音频数据很难像文本那样进行分割，因此无法直接使用RNN进行训练。</p>
 <blockquote>
 <p>给定输入序列 X={x1,x2,……xT}以及对应的标签数据 Y={y1,y2,……yU}，目的是找到X到Y的一个映射，这种对时序数据进行分类的算法叫做Temporal Classification。</p>
@@ -379,7 +385,6 @@
 <p><strong>1.3 结果搜索</strong></p>
 <p>贪心搜索是选取每一帧预测概率最大的那一项作为结果，此外还有束搜索，和基于动态规划的搜索。</p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p><strong>1. speech-to-text</strong></p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -387,8 +392,7 @@
 <th>output</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>正常语音+扰动</td>
 <td>目标语义</td>
 </tr>
@@ -400,11 +404,8 @@
 <td>随机噪音+扰动</td>
 <td>目标语义</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p><strong>2. speech commands classification</strong></p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -412,8 +413,7 @@
 <th>output</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>正常语音+扰动</td>
 <td>目标分类</td>
 </tr>
@@ -425,35 +425,32 @@
 <td>随机噪音+扰动</td>
 <td>目标分类</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>18年之前的工作基本都是基于传统的语音模型（非神经网络）来做的，或是需要生成全新的音频，例如一段音乐隐藏语音指令这种，不能实现类似于图像对抗中与源数据不可区分的效果；</p>
 <blockquote>
-<p><em>Hidden voice commands.\<br>Dolphinattack: Inaudible voice commands.\<br>Inaudible voice commands.</em> </p>
+<p><em>Hidden voice commands.<br>Dolphinattack: Inaudible voice commands.<br>Inaudible voice commands.</em> </p>
 </blockquote>
 <p>同时期另一条研究线路能够做到于源数据几乎不可区分的untarget攻击；</p>
 <blockquote>
-<p><em>Crafting adversarial examples for speech paralinguistics applications.\<br>Houdini: Fooling deep structured prediction models.</em></p>
+<p><em>Crafting adversarial examples for speech paralinguistics applications.<br>Houdini: Fooling deep structured prediction models.</em></p>
 </blockquote>
 <p>2018年Carlini &amp; Wagner实现了针对任意多词句子的语音识别系统构建了对抗样本，但不能在real world有效。同年CommanderSong开发出了在real world有效的对抗样本，但代价是给原始音频引入了明显的扰动。</p>
 <blockquote>
-<p><em>Audio adversarial examples: Targeted attacks on speech-to-text.\<br>Commandersong: A systematic approach for practical adversarial voice recognition.</em></p>
+<p><em>Audio adversarial examples: Targeted attacks on speech-to-text.<br>Commandersong: A systematic approach for practical adversarial voice recognition.</em></p>
 </blockquote>
 <p>此后，一些工作开发了对深度学习ASR系统的攻击，要么在real world中工作，要么不那么明显地被察觉</p>
 <blockquote>
-<p><em>Robust audio adversarial example for a physical attack.\<br>Adversarial attacks against automatic speech recognition systems via psychoacoustic hiding.</em></p>
+<p><em>Robust audio adversarial example for a physical attack.<br>Adversarial attacks against automatic speech recognition systems via psychoacoustic hiding.</em></p>
 </blockquote>
 <p>在后面，就是一些将白盒设置转为黑盒设置的一些工作</p>
 <blockquote>
-<p><em>Adversarial blackbox attacks for automatic speech recognition systems using multi-objective genetic optimization.\<br>Targeted adversarial examples for black box audio systems.</em></p>
+<p><em>Adversarial blackbox attacks for automatic speech recognition systems using multi-objective genetic optimization.<br>Targeted adversarial examples for black box audio systems.</em></p>
 </blockquote>
 <h3 id="具体方法"><a href="#具体方法" class="headerlink" title="具体方法"></a>具体方法</h3><p>直觉是直接使用图像中生成对抗样本的算法，例如FGSM、DeepFool、PGD等等，但是这些方法在语音对抗样本生成过程中都不好用。因此需要新的算法设计。</p>
 <h4 id="1-真正意义上第一个对抗语音工作：Audio-Adversarial-Examples-Targeted-Attacks-on-Speech-to-Text-作者是C-amp-W"><a href="#1-真正意义上第一个对抗语音工作：Audio-Adversarial-Examples-Targeted-Attacks-on-Speech-to-Text-作者是C-amp-W" class="headerlink" title="1. 真正意义上第一个对抗语音工作：Audio Adversarial Examples:Targeted Attacks on Speech-to-Text 作者是C&amp;W"></a>1. 真正意义上第一个对抗语音工作：Audio Adversarial Examples:Targeted Attacks on Speech-to-Text 作者是C&amp;W</h4><p><a target="_blank" rel="noopener" href="https://github.com/carlini/audio_adversarial_examples">https://github.com/carlini/audio_adversarial_examples</a></p>
 <blockquote>
-<p>白盒场景下，针对百度DeepSpeech迭代优化攻击。给定任意音频波形，可以产生99.99%相似的另一个音频，且可以转录为所选择的任何短语。\<br>算法：借鉴了图像对抗样本中的C&amp;W方法，将对抗语音生成问题首次转换为了优化问题，并首次在语音对抗样本生成目标函数中引入了深度学习语音识别模型特有的CTC损失函数。</p>
+<p>白盒场景下，针对百度DeepSpeech迭代优化攻击。给定任意音频波形，可以产生99.99%相似的另一个音频，且可以转录为所选择的任何短语。<br>算法：借鉴了图像对抗样本中的C&amp;W方法，将对抗语音生成问题首次转换为了优化问题，并首次在语音对抗样本生成目标函数中引入了深度学习语音识别模型特有的CTC损失函数。</p>
 </blockquote>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -462,38 +459,27 @@
 <th>Solve $l_{\infty}$  without converge</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td><img src="2020-12-15-19-01-45.png" alt=""></td>
-<td><img src="2020-12-15-19-06-05.png" alt=""></td>
-<td><img src="2020-12-15-19-21-33.png" alt=""></td>
+<tbody><tr>
+<td><img src="2020-12-15-19-01-45.png"></td>
+<td><img src="2020-12-15-19-06-05.png"></td>
+<td><img src="2020-12-15-19-21-33.png"></td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>在这里设$l(x’,t)=CTC-Loss(x’,t)$，</p>
 <p><strong>Improved loss function：</strong></p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th><img src="2020-12-15-19-46-04.png" alt=""></th>
-<th><img src="2020-12-15-19-46-40.png" alt=""></th>
-<th><img src="2020-12-15-19-47-44.png" alt=""></th>
+<th><img src="2020-12-15-19-46-04.png"></th>
+<th><img src="2020-12-15-19-46-40.png"></th>
+<th><img src="2020-12-15-19-47-44.png"></th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
 </table>
-</div>
 <p>本文在improved loss中说明攻击方法只能在 DeepSpeech 使用 Greedy-Search 的情况下有效。</p>
 <ul>
 <li><strong>Demo</strong></li>
 </ul>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -502,8 +488,7 @@
 <th>Transcription</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>original</td>
 <td><audio id="audio" controls="" preload="none"><source id="mp3" src="https://nicholas.carlini.com/code/audio_adversarial_examples/adversarial0.wav"></audio></td>
 <td>without the dataset the article is useless</td>
@@ -513,15 +498,13 @@
 <td><audio id="audio" controls="" preload="none"><source id="mp3" src="https://nicholas.carlini.com/code/audio_adversarial_examples/adversarial0.wav"></audio></td>
 <td>okay google browse to evil dot com</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h4 id="2-两阶段优化求解噪声：SirenAttack-Generating-Adversarial-Audio-for-End-to-End-Acoustic-Systems"><a href="#2-两阶段优化求解噪声：SirenAttack-Generating-Adversarial-Audio-for-End-to-End-Acoustic-Systems" class="headerlink" title="2. 两阶段优化求解噪声：SirenAttack: Generating Adversarial Audio for End-to-End Acoustic Systems"></a>2. 两阶段优化求解噪声：SirenAttack: Generating Adversarial Audio for End-to-End Acoustic Systems</h4><blockquote>
-<p>白盒：第一阶段先利用粒子群算法(PSO)求出粗粒度的噪声$\delta$,第二阶段再利用CTC-loss反馈的梯度信息使用Fooling Gradient方法对其矫正求出更精确的$\delta$。\<br>   黑盒：由于没有loss信息，所以在第一阶段引入模型置信度量，引导粒子群向更优方向迭代，效果有限。</p>
+<p>白盒：第一阶段先利用粒子群算法(PSO)求出粗粒度的噪声$\delta$,第二阶段再利用CTC-loss反馈的梯度信息使用Fooling Gradient方法对其矫正求出更精确的$\delta$。<br>   黑盒：由于没有loss信息，所以在第一阶段引入模型置信度量，引导粒子群向更优方向迭代，效果有限。</p>
 </blockquote>
 <p>亮点：涉及到了黑盒、计算效率高生成时间段、攻击测试了多个主流的语音识别模型</p>
 <h4 id="3-设计新的代理损失函数：Houdini-Fooling-Deep-Structured-Visual-and-Speech-Recognition-Models-with-Adversarial-Examples"><a href="#3-设计新的代理损失函数：Houdini-Fooling-Deep-Structured-Visual-and-Speech-Recognition-Models-with-Adversarial-Examples" class="headerlink" title="3. 设计新的代理损失函数：Houdini: Fooling Deep Structured Visual and Speech Recognition Models with Adversarial Examples"></a>3. 设计新的代理损失函数：Houdini: Fooling Deep Structured Visual and Speech Recognition Models with Adversarial Examples</h4><p>解决了对抗样本生成中评价指标存在组合及不可谓的问题，如语音识别中常用word error rate来评价，其就是不可微的。文章中提到，虽然CTC针对语音识别任务是一种可微的代理损失函数，但是针对其他结构性任务（如语义分割、姿态估计等）并没有一致性保证。本文实际是提出了一种针对类似不可微问题下生成对抗样本的框架。</p>
-<p>文章提出了一种Houdini代理损失函数，可以用来针对结构性任务生成对抗样本：<br><img src="2020-12-16-11-16-23.png" alt=""></p>
+<p>文章提出了一种Houdini代理损失函数，可以用来针对结构性任务生成对抗样本：<br><img src="2020-12-16-11-16-23.png"></p>
 <p>文章中还对基于Houdini和CTC两种损失函数生成的对抗样本进行了比较，结果显示Houdini要优于CTC，但是target攻击效果并不好。 ps:由于遇到MFC层反向传播的困难，因此攻击只能生成音谱对抗数据，不能直接生成audio，工作1解决了这个问题。</p>
 <h4 id="4-不可察觉-鲁棒：Imperceptible-Robust-and-Targeted-Adversarial-Examples-for-Automatic-Speech-Recognition"><a href="#4-不可察觉-鲁棒：Imperceptible-Robust-and-Targeted-Adversarial-Examples-for-Automatic-Speech-Recognition" class="headerlink" title="4. 不可察觉+鲁棒：Imperceptible, Robust, and Targeted Adversarial Examples for Automatic Speech Recognition"></a>4. 不可察觉+鲁棒：Imperceptible, Robust, and Targeted Adversarial Examples for Automatic Speech Recognition</h4><ul>
 <li>白盒、有目标的、针对端到端LAS模型的对抗攻击算法；</li>
@@ -551,7 +534,7 @@
 <li>思路简单，提取MFCC特征（这个过程会丢失一些语音信息），然后把MFCC特征逆转为语音信号</li>
 <li>算法描述不清晰，如何对MFCC逆转没过多提及。</li>
 </ul>
-<p><img src="2020-12-17-17-32-37.png" alt=""></p>
+<p><img src="2020-12-17-17-32-37.png"></p>
 <h4 id="9-黑盒-amp-白盒：Hidden-Voice-Commands"><a href="#9-黑盒-amp-白盒：Hidden-Voice-Commands" class="headerlink" title="9. 黑盒&amp;白盒：Hidden Voice Commands"></a>9. 黑盒&amp;白盒：Hidden Voice Commands</h4><p>黑盒下生成一段无关的音频，其中隐藏有语音指令，本质上还不能称之为对抗语音，因为生成的音频不是不可察觉的。</p>
 <ul>
 <li>是对Cocaine Noodles的完善</li>
@@ -559,11 +542,12 @@
 <li>使用梯度下降算法攻击GMM-HMM模型</li>
 <li>从这篇开始语音对抗有了比较清晰的思路，calini还是很有经验的。</li>
 </ul>
-<p><img src="2020-12-16-20-14-15.png" alt=""></p>
+<p><img src="2020-12-16-20-14-15.png"></p>
 <p>比较关键的是MFCC parameter和inverse MFCC这两步。计算MFCC然后逆转为时域信号的过程，能够从理论上保留<strong>语音识别算法关注的特征，而抹除不想管的语音特征</strong>，而抹除的这部分特征又很可能是对人的听觉影响是很大的，导致人无法听清对抗样本。</p>
 <h4 id="10-黑盒：“Did-you-hear-that-Adversarial-Examples-Against-Automatic-Speech-Recognition-”"><a href="#10-黑盒：“Did-you-hear-that-Adversarial-Examples-Against-Automatic-Speech-Recognition-”" class="headerlink" title="10. 黑盒：“Did you hear that? Adversarial Examples Against Automatic Speech Recognition,”"></a>10. 黑盒：“Did you hear that? Adversarial Examples Against Automatic Speech Recognition,”</h4><p><a target="_blank" rel="noopener" href="https://github.com/nesl/adversarial_audio">https://github.com/nesl/adversarial_audio</a></p>
 <p>场景是语音分类场景下的对抗样本攻击，攻击目标是ASR，指出语音对抗样本无法适用基于梯度的优化迭代方法，使用了<strong>遗传算法</strong>。</p>
-<p><img src="2020-12-17-13-29-34.png" width="60%" height="60%"></p>
+<img src="2020-12-17-13-29-34.png" width="60%" height="60%">
+
 <h4 id="11-不可听超声波蕴含语义信息：DolphinAttack-Inaudible-Voice-Commands"><a href="#11-不可听超声波蕴含语义信息：DolphinAttack-Inaudible-Voice-Commands" class="headerlink" title="11. 不可听超声波蕴含语义信息：DolphinAttack: Inaudible Voice Commands"></a>11. 不可听超声波蕴含语义信息：DolphinAttack: Inaudible Voice Commands</h4><p>海豚音攻击：利用麦克风的非线性来用高于20 kHz的超声波调节基带音频信号，可以隐藏转录。让正常的语音隐藏到高频波段中，从而让其无法被听到。</p>
 <p><strong>实质上是利用了麦克风的非线性漏洞，使得高频信号采样后出现额外的低频分量</strong></p>
 <h4 id="12-心理声学模型：Adversarial-Attacks-Against-Automatic-Speech-Recognition-Systems-via-Psychoacoustic-Hiding"><a href="#12-心理声学模型：Adversarial-Attacks-Against-Automatic-Speech-Recognition-Systems-via-Psychoacoustic-Hiding" class="headerlink" title="12. 心理声学模型：Adversarial Attacks Against Automatic Speech Recognition Systems via Psychoacoustic Hiding"></a>12. 心理声学模型：Adversarial Attacks Against Automatic Speech Recognition Systems via Psychoacoustic Hiding</h4><p>介绍了一种基于心理声学隐藏的攻击ASR系统的新型对抗样本。利用如MP3编码中的心理声学建模，以减少可察觉的噪音。</p>
@@ -571,7 +555,7 @@
 <li>白盒、有目标的、针对DNN-HMM模型的对抗攻击算法</li>
 <li>首次提出使用升学掩蔽效应</li>
 </ul>
-<p><img src="2020-12-17-17-03-20.png" alt=""></p>
+<p><img src="2020-12-17-17-03-20.png"></p>
 <p>example：黑色为1Khz处60db的能量掩蔽曲线</p>
 <h4 id="13-音乐-指令隐藏：CommanderSong-A-Systematic-Approach-for-Practical-Adversarial-Voice-Recognition"><a href="#13-音乐-指令隐藏：CommanderSong-A-Systematic-Approach-for-Practical-Adversarial-Voice-Recognition" class="headerlink" title="13 音乐+指令隐藏：CommanderSong: A Systematic Approach for Practical Adversarial Voice Recognition"></a>13 音乐+指令隐藏：CommanderSong: A Systematic Approach for Practical Adversarial Voice Recognition</h4><p>在歌曲中加入语音命令，通过播放歌曲实施攻击</p>
 <h4 id="14-Practical-Hidden-Voice-Attacks-against-Speech-and-Speaker-Recognition-Systems"><a href="#14-Practical-Hidden-Voice-Attacks-against-Speech-and-Speaker-Recognition-Systems" class="headerlink" title="14. Practical Hidden Voice Attacks against Speech and Speaker Recognition Systems"></a>14. Practical Hidden Voice Attacks against Speech and Speaker Recognition Systems</h4><ul>
@@ -584,16 +568,15 @@
 <li>可以大大减少黑盒攻击下query的次数</li>
 <li>不是基于梯度来做的</li>
 </ul>
-<p><img src="2020-12-17-19-48-34.png" alt=""></p>
+<p><img src="2020-12-17-19-48-34.png"></p>
 <p>signal decomposition用的是DFT or SSA，没用MFCC，步骤也比较简单，就是设置阈值对信号进行截断，在不影响人耳识别的情况下，尽可能欺骗ASR。由于不涉及梯度，所以可以看作是黑盒的。</p>
 <h4 id="16-The-Faults-in-our-ASRs-An-Overview-of-Attacks-against-Automatic-Speech-Recognition-and-Speaker-Identification-Systems"><a href="#16-The-Faults-in-our-ASRs-An-Overview-of-Attacks-against-Automatic-Speech-Recognition-and-Speaker-Identification-Systems" class="headerlink" title="16. The Faults in our ASRs: An Overview of Attacks against Automatic Speech Recognition and Speaker Identification Systems"></a>16. The Faults in our ASRs: An Overview of Attacks against Automatic Speech Recognition and Speaker Identification Systems</h4><blockquote>
 <p>2021年 S&amp;P的一篇综述：（Hadi Abdullah在audio攻击有若干工作）下图是总结了已有攻击的各个维度的对比。</p>
 </blockquote>
-<p><img src="2020-12-17-17-45-53.png" alt=""></p>
+<p><img src="2020-12-17-17-45-53.png"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对语音识别系统做对抗样本攻击，首先要了解语音模型的识别流程，重点是特征提取的CTC步骤，然后在黑盒下要注意使用遗传算法，同时，要做到现实可用且不可察觉两点要求。基于上述的攻击目标，目前的工作基本只能完成其中几项，且实验条件苛刻。   </p>
-<p><img src="语音对抗攻击.png" alt=""></p>
-<h2 id="一些开源的实现"><a href="#一些开源的实现" class="headerlink" title="一些开源的实现"></a>一些开源的实现</h2><h3 id="Audio-Adversarial-Examples-Paper-List"><a href="#Audio-Adversarial-Examples-Paper-List" class="headerlink" title="Audio Adversarial Examples Paper List"></a>Audio Adversarial Examples Paper List</h3><div class="table-container">
-<table>
+<p><img src="%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E6%94%BB%E5%87%BB.png"></p>
+<h2 id="一些开源的实现"><a href="#一些开源的实现" class="headerlink" title="一些开源的实现"></a>一些开源的实现</h2><h3 id="Audio-Adversarial-Examples-Paper-List"><a href="#Audio-Adversarial-Examples-Paper-List" class="headerlink" title="Audio Adversarial Examples Paper List"></a>Audio Adversarial Examples Paper List</h3><table>
 <thead>
 <tr>
 <th>Title</th>
@@ -605,8 +588,7 @@
 <th>Presentation</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td><a target="_blank" rel="noopener" href="http://arxiv.org/abs/1708.07238">Inaudible Voice Commands</a></td>
 <td>L. Song et al.</td>
 <td>CCS</td>
@@ -748,10 +730,9 @@
 <td>2020</td>
 <td><a target="_blank" rel="noopener" href="https://github.com/RiskySignal/Devil-Whisper-Attack">☑️</a></td>
 <td><a target="_blank" rel="noopener" href="https://sites.google.com/view/devil-whisper">☑️</a></td>
+<td></td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 
     </div>
 
