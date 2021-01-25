@@ -218,7 +218,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -265,6 +265,162 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://gaojiqiang.github.io/2021/01/25/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E9%BB%91%E7%9B%92%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon.jpg">
+      <meta itemprop="name" content="Jiqiang Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="G Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/25/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E9%BB%91%E7%9B%92%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-25 17:50:11 / Modified: 17:52:11" itemprop="dateCreated datePublished" datetime="2021-01-25T17:50:11+08:00">2021-01-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在tx实习一个月，这一个月主要在研究针对语音的对抗攻击，前期阅读了目前为止一些流行的工作，包括了白盒和黑盒，在后期进行实验复现的时候，mentor主要还是想聚焦在黑盒场景下，不过确实感到黑盒才是在现实世界中更有意义的攻击。目前主要跑了以下几种黑盒的攻击：</p>
+<h3 id="1-Hear-“No-Evil”-See-“Kenansville”-Efficient-and-Transferable-Black-Box-Attacks-on-Speech-Recognition-and-Voice-Identification-Systems"><a href="#1-Hear-“No-Evil”-See-“Kenansville”-Efficient-and-Transferable-Black-Box-Attacks-on-Speech-Recognition-and-Voice-Identification-Systems" class="headerlink" title="1. Hear “No Evil”, See “Kenansville”: Efficient and Transferable Black-Box Attacks on Speech Recognition and Voice Identification Systems"></a>1. Hear “No Evil”, See “Kenansville”: Efficient and Transferable Black-Box Attacks on Speech Recognition and Voice Identification Systems</h3><p>本文的攻击使用了信号处理转换的手法来改变音频样本的表现形式，分为两类，data-independent和data-dependent。这两种方法的思路都是做<strong>原始样本—&gt;提取特征—&gt;特征剪枝—&gt;求逆返回样本。</strong> 假设是ASR识别所需要的关键成分对人耳的听感并不重要。将关键成分抹除达到untarget攻击。是一种<strong>查询式</strong>的黑盒攻击，需要query的次数较少。因此比较实用。<br><strong>1）data-independent：</strong> 不同的信号特征提取方法会提取出不同的音频特征，这种方法对DFT（离散傅里叶变换）特征变换过程进行干扰，因为DFT是一种通用的语音处理工具，并且也是MFCC其中的一步。对DFT过程进行扰动，会对后续的一系列处理都产生影响。<br><strong>攻击过程</strong>：实质上就是对某一阈值以下的频率进行置零处理，直至找到最优的那个阈值，最大程度的去除频率信息并且保障语义最小出错。阈值的优化过程采用了二分法。文章中说，这样做能够把模型决策的特征给扰动，并且不太影响听觉的感知。实质上，攻击复现后听感还是有一定的影响。若当前阈值下translate出错，则降低阈值，反之则提升阈值。<br><img src="2021-01-13-13-15-26.png"><br><strong>2）data-dependent:</strong>  SSA方法：data—-&gt;特征向量，特征值小的特征向量蕴含的信息较少。实际实验中，这个攻击效果不如上面，但是对音频的听感扰动较小。<br><img src="2021-01-13-13-27-26.png"><br><strong>3）overview</strong><br><img src="2021-01-13-13-59-43.png"><br><strong>4）攻击效果</strong><br>在腾讯云、Google、IBM、百度云等多个speech API进行测试，都能产生误转录。不同厂商的鲁棒性不同。同时能产生攻击效果的对抗样本也存在一定程度的质量下降。文章中说可以只针对部分区间内的因素进行扰动，可以提升扰动后音频的质量。在实验中，只是跑了一下对整体音频区间的扰动。<a target="_blank" rel="noopener" href="https://github.com/kwarren9413/kenansville_attack">https://github.com/kwarren9413/kenansville_attack</a><br><strong>5）一些思考</strong><br>可以只针对某部分因素或者单词进行扰动，不需要全部进行扰动，但是存在的问题是这部分扰动的效果相比于clean部分很明显，虽然只扰动部分能够对后续的预测结果产生影响，但是很容易引起人的怀疑。</p>
+<h3 id="2-Practical-Hidden-Voice-Attacks-against-Speech-and-Speaker-Recognition-Systems"><a href="#2-Practical-Hidden-Voice-Attacks-against-Speech-and-Speaker-Recognition-Systems" class="headerlink" title="2. Practical Hidden Voice Attacks against Speech and Speaker Recognition Systems"></a>2. Practical Hidden Voice Attacks against Speech and Speaker Recognition Systems</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/25/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E9%BB%91%E7%9B%92%E6%80%BB%E7%BB%93/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://gaojiqiang.github.io/2021/01/25/wangyisen-%E5%AF%B9%E6%8A%97%E8%AE%AD%E7%BB%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon.jpg">
+      <meta itemprop="name" content="Jiqiang Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="G Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/25/wangyisen-%E5%AF%B9%E6%8A%97%E8%AE%AD%E7%BB%83/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-01-25 17:50:03 / Modified: 17:53:03" itemprop="dateCreated datePublished" datetime="2021-01-25T17:50:03+08:00">2021-01-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="On-the-Convergence-and-Robustness-of-Adversarial-Training"><a href="#On-the-Convergence-and-Robustness-of-Adversarial-Training" class="headerlink" title="On the Convergence and Robustness of Adversarial Training"></a>On the Convergence and Robustness of Adversarial Training</h1><p><strong>摘要：</strong> 对抗学习实质上是在解决一个min-max问题，max问题解的怎么样直接决定了模型的鲁棒性，本文提出了一个衡量max解的方法FOSC，可以对生成的对抗样本的收敛性进行定量评测，并发现在模型训练后期使用收敛性好的对抗样本可以提高模型的鲁棒性，在前期使用是不必要的甚至有害于模型精度，最后提出了一种动态鲁棒训练的算法使得模型更加鲁棒。</p>
+<p><strong>Tips：</strong> </p>
+<ul>
+<li><p>对抗训练实质上是在解决min-max优化问题，max问题实质就是在寻找对抗样本，max问题解的怎么样直接决定了模型的鲁棒性。<br><img src="2021-01-22-20-36-19.png"></p>
+</li>
+<li><p>两种对抗方法，FGSM和PGD，FGSM是单步，PGD是多步。</p>
+</li>
+</ul>
+<p><img src="2021-01-22-20-48-36.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/25/wangyisen-%E5%AF%B9%E6%8A%97%E8%AE%AD%E7%BB%83/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -417,81 +573,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/01/24/FL%E8%90%BD%E5%9C%B0%E6%A1%86%E6%9E%B6%E8%B0%83%E7%A0%94/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://gaojiqiang.github.io/2020/12/17/res/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/icon.jpg">
-      <meta itemprop="name" content="Jiqiang Gao">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="G Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/17/res/" class="post-title-link" itemprop="url">语音对抗攻击</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2020-12-17 20:06:03 / Modified: 23:38:09" itemprop="dateCreated datePublished" datetime="2020-12-17T20:06:03+08:00">2020-12-17</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="语音对抗调研"><a href="#语音对抗调研" class="headerlink" title="语音对抗调研"></a>语音对抗调研</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>相较于在图像上进行对抗攻击，对语音识别任务进行对抗攻击起步更晚，也更具有挑战性。原因在于语音识别极大依赖于语音信号数据中的频率和时序赖关系，在输入模型识别前需要对语音进行预处理和语音特征提取得到语音频谱图，图像上的对抗攻击可以利用给定可微损失函数的梯度来指导对抗搜索，但是语音上的损失标准一般不可分解，很难用梯度的方法去生成对抗样本。</p>
-<p><img src="2020-12-16-10-36-41.png"></p>
-<p>下面说一下针对语音识别系统对抗攻击的几个标志性工作：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/17/res/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

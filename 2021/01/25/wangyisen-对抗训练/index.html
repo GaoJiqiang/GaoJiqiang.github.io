@@ -24,16 +24,25 @@
     var CONFIG = {"hostname":"gaojiqiang.github.io","root":"/","scheme":"Pisces","version":"8.0.2","exturl":false,"sidebar":{"position":"left","width":250,"display":"always","padding":10,"offset":12,"scrollpercent":true},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.json","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="On the Convergence and Robustness of Adversarial Training摘要： 对抗学习实质上是在解决一个min-max问题，max问题解的怎么样直接决定了模型的鲁棒性，本文提出了一个衡量max解的方法FOSC，可以对生成的对抗样本的收敛性进行定量评测，并发现在模型训练后期使用收敛性好的对抗样本可以提高模型的鲁棒性，在前期使用是不必要的甚至有害于模型精度，">
+<meta property="og:type" content="article">
 <meta property="og:title" content="G Blog">
-<meta property="og:url" content="https://gaojiqiang.github.io/archives/2020/index.html">
+<meta property="og:url" content="https://gaojiqiang.github.io/2021/01/25/wangyisen-%E5%AF%B9%E6%8A%97%E8%AE%AD%E7%BB%83/index.html">
 <meta property="og:site_name" content="G Blog">
+<meta property="og:description" content="On the Convergence and Robustness of Adversarial Training摘要： 对抗学习实质上是在解决一个min-max问题，max问题解的怎么样直接决定了模型的鲁棒性，本文提出了一个衡量max解的方法FOSC，可以对生成的对抗样本的收敛性进行定量评测，并发现在模型训练后期使用收敛性好的对抗样本可以提高模型的鲁棒性，在前期使用是不必要的甚至有害于模型精度，">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/01/25/wangyisen-%E5%AF%B9%E6%8A%97%E8%AE%AD%E7%BB%83/2021-01-22-20-36-19.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/01/25/wangyisen-%E5%AF%B9%E6%8A%97%E8%AE%AD%E7%BB%83/2021-01-22-20-48-36.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/01/25/wangyisen-%E5%AF%B9%E6%8A%97%E8%AE%AD%E7%BB%83/2021-01-22-20-48-55.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/01/25/wangyisen-%E5%AF%B9%E6%8A%97%E8%AE%AD%E7%BB%83/2021-01-22-20-50-32.png">
+<meta property="article:published_time" content="2021-01-25T09:50:03.067Z">
+<meta property="article:modified_time" content="2021-01-25T09:53:03.394Z">
 <meta property="article:author" content="Jiqiang Gao">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gaojiqiang.github.io/2021/01/25/wangyisen-%E5%AF%B9%E6%8A%97%E8%AE%AD%E7%BB%83/2021-01-22-20-36-19.png">
 
 
-<link rel="canonical" href="https://gaojiqiang.github.io/archives/2020/">
+<link rel="canonical" href="https://gaojiqiang.github.io/2021/01/25/wangyisen-%E5%AF%B9%E6%8A%97%E8%AE%AD%E7%BB%83/">
 
 
 <script class="page-configurations">
@@ -41,12 +50,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Archive | G Blog</title>
+  <title> | G Blog</title>
   
 
 
@@ -190,7 +199,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -203,6 +212,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#On-the-Convergence-and-Robustness-of-Adversarial-Training"><span class="nav-number">1.</span> <span class="nav-text">On the Convergence and Robustness of Adversarial Training</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -261,73 +271,103 @@
 </noscript>
 
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
       
 
       
 
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">Um..! 6 posts in total. Keep on posting.</span>
-      </div>
 
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://gaojiqiang.github.io/2021/01/25/wangyisen-%E5%AF%B9%E6%8A%97%E8%AE%AD%E7%BB%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon.jpg">
+      <meta itemprop="name" content="Jiqiang Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="G Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+
+      <time title="Created: 2021-01-25 17:50:03 / Modified: 17:53:03" itemprop="dateCreated datePublished" datetime="2021-01-25T17:50:03+08:00">2021-01-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="On-the-Convergence-and-Robustness-of-Adversarial-Training"><a href="#On-the-Convergence-and-Robustness-of-Adversarial-Training" class="headerlink" title="On the Convergence and Robustness of Adversarial Training"></a>On the Convergence and Robustness of Adversarial Training</h1><p><strong>摘要：</strong> 对抗学习实质上是在解决一个min-max问题，max问题解的怎么样直接决定了模型的鲁棒性，本文提出了一个衡量max解的方法FOSC，可以对生成的对抗样本的收敛性进行定量评测，并发现在模型训练后期使用收敛性好的对抗样本可以提高模型的鲁棒性，在前期使用是不必要的甚至有害于模型精度，最后提出了一种动态鲁棒训练的算法使得模型更加鲁棒。</p>
+<p><strong>Tips：</strong> </p>
+<ul>
+<li><p>对抗训练实质上是在解决min-max优化问题，max问题实质就是在寻找对抗样本，max问题解的怎么样直接决定了模型的鲁棒性。<br><img src="2021-01-22-20-36-19.png"></p>
+</li>
+<li><p>两种对抗方法，FGSM和PGD，FGSM是单步，PGD是多步。</p>
+</li>
+</ul>
+<p><img src="2021-01-22-20-48-36.png"></p>
+<p><img src="2021-01-22-20-48-55.png"></p>
+<ul>
+<li>提出了一个衡量max问题解的收敛性的标准FOSC，随后实验中测了一些FOSC收敛性和对抗效果（accuracy，loss）的影响。</li>
+</ul>
+<p><img src="2021-01-22-20-50-32.png"></p>
+<ul>
+<li>提出了对抗学习在不同阶段应使用不同的对抗学习方法，在模型训练前期使用较强的对抗方法几乎不会提高鲁棒性甚至对模型准确率有害，进而提出了一种动态对抗学习的方法。</li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-12-17T20:06:03+08:00"
-              content="2020-12-17">
-          12-17
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/12/17/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E8%B0%83%E7%A0%94/" itemprop="url">
-            <span itemprop="name">语音对抗攻击</span>
-          </a>
-      </div>
+    <footer class="post-footer">
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/01/25/DeepFaceLab/" rel="prev" title="DeepFaceLab">
+                  <i class="fa fa-chevron-left"></i> DeepFaceLab
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/01/25/%E8%AF%AD%E9%9F%B3%E5%AF%B9%E6%8A%97%E9%BB%91%E7%9B%92%E6%80%BB%E7%BB%93/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2020-11-18T16:18:06+08:00"
-              content="2020-11-18">
-          11-18
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/11/18/%E5%9C%A8%E5%8A%A0%E5%AF%86%E6%95%B0%E6%8D%AE%E4%B8%8A%E8%BF%9B%E8%A1%8C%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E8%AE%AD%E7%BB%83/" itemprop="url">
-            <span itemprop="name">在加密数据上进行神经网络的训练</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+</div>
 
 
-    </div>
-  </div>
-  
-  
-  
 
-  
 
 
 
