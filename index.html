@@ -218,14 +218,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
@@ -301,15 +301,6 @@
 
       <time title="Created: 2021-02-07 21:39:09 / Modified: 21:41:27" itemprop="dateCreated datePublished" datetime="2021-02-07T21:39:09+08:00">2021-02-07</time>
     </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/DeepFace-AI-Security/" itemprop="url" rel="index"><span itemprop="name">DeepFace, AI Security</span></a>
-        </span>
-    </span>
 
   
 </div>
@@ -372,7 +363,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://gaojiqiang.github.io/2021/02/07/adversarial%20competition/adversarial%20competition/paper/">
+    <link itemprop="mainEntityOfPage" href="https://gaojiqiang.github.io/2021/02/07/deepdetection/deep_detection/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/icon.jpg">
@@ -386,7 +377,108 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/07/adversarial%20competition/adversarial%20competition/paper/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2021/02/07/deepdetection/deep_detection/" class="post-title-link" itemprop="url">DeepFake检测</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-02-07 21:39:09" itemprop="dateCreated datePublished" datetime="2021-02-07T21:39:09+08:00">2021-02-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-02-08 00:13:37" itemprop="dateModified" datetime="2021-02-08T00:13:37+08:00">2021-02-08</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DeepFace-AI-Security/" itemprop="url" rel="index"><span itemprop="name">DeepFace, AI Security</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="DeepFake-Dectection"><a href="#DeepFake-Dectection" class="headerlink" title="DeepFake Dectection"></a>DeepFake Dectection</h1><p>读完后的一些思考：</p>
+<ul>
+<li>定义什么叫做fake视频，视频中只要出现fake换脸就定义为fake，不论换了多少个人或者换了多少帧。</li>
+<li>检测大多是都是基于帧间的时序特征来建模。提取帧后当作伪造image检测来做。但是存在的问题是，视频中会存在多个人，一部分换脸一部分不换脸，对每一帧的分数做平均后会影响最终对视频的整体评判打分。</li>
+<li>检测方法比较费算力和存储资源，模型很大并且很难泛化到未知换脸算法。</li>
+<li>牙齿通常根本没有建模。这一点在很多视频中都很明显，在这些视频中，牙齿看起来是一个白色的小点，而不是单个的牙齿。能否根据这个特征建模？或者将人脸进行切割，不同部分进行不同建模？</li>
+<li><p>为了避免针对每一帧都进行检测，能否将一段时间的视频帧融合求一个特征？来判断这一段时间内是否是fake。</p>
+</li>
+<li><p>git上的一些检测论文note：<a target="_blank" rel="noopener" href="https://github.com/592McAvoy/fake-face-detection/blob/master/detect.md#cvpr-2019-recurrent-convolutional-strategies-for-face-manipulation-detection-in-videos">https://github.com/592McAvoy/fake-face-detection/blob/master/detect.md#cvpr-2019-recurrent-convolutional-strategies-for-face-manipulation-detection-in-videos</a></p>
+</li>
+</ul>
+<h2 id="基于video的检测"><a href="#基于video的检测" class="headerlink" title="基于video的检测"></a>基于video的检测</h2><blockquote>
+<p>总体流程大致相似，先将视频转为帧，然后用CNN特征提取，再用RNN做时序建模。缺点是帧级标注成本较高，过多关注时序建模。都是在堆模型。</p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/07/deepdetection/deep_detection/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://gaojiqiang.github.io/2021/02/07/adversarial%20competition/adversarial%20competition/adversarial-competition/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon.jpg">
+      <meta itemprop="name" content="Jiqiang Gao">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="G Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/07/adversarial%20competition/adversarial%20competition/adversarial-competition/" class="post-title-link" itemprop="url">天池对抗鲁棒</a>
         </h2>
 
         <div class="post-meta-container">
@@ -404,8 +496,17 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-02-01 14:44:10" itemprop="dateModified" datetime="2021-02-01T14:44:10+08:00">2021-02-01</time>
+        <time title="Modified: 2021-02-08 00:20:38" itemprop="dateModified" datetime="2021-02-08T00:20:38+08:00">2021-02-08</time>
       </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Adversarial-training-AI-Security/" itemprop="url" rel="index"><span itemprop="name">Adversarial training, AI Security</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -417,8 +518,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="FAST-IS-BETTER-THAN-FREE-REVISITING-ADVERSARIAL-TRAINING"><a href="#FAST-IS-BETTER-THAN-FREE-REVISITING-ADVERSARIAL-TRAINING" class="headerlink" title="FAST IS BETTER THAN FREE: REVISITING ADVERSARIAL TRAINING"></a>FAST IS BETTER THAN FREE: REVISITING ADVERSARIAL TRAINING</h1><p><strong>摘要：</strong> 这篇文章提出了一种比基于PGD进行对抗训练更高效的方法，传统的基于PGD的训练方法时间开销很大，本文发现，可以利用FGSM和随机初始化结合达到与PGD相同的模型鲁棒性，并且时间开销更小。</p>
-
+          <h2 id="FAST-IS-BETTER-THAN-FREE-REVISITING-ADVERSARIAL-TRAINING"><a href="#FAST-IS-BETTER-THAN-FREE-REVISITING-ADVERSARIAL-TRAINING" class="headerlink" title="FAST IS BETTER THAN FREE: REVISITING ADVERSARIAL TRAINING"></a>FAST IS BETTER THAN FREE: REVISITING ADVERSARIAL TRAINING</h2><p><strong>摘要：</strong> 这篇文章提出了一种比基于PGD进行对抗训练更高效的方法，传统的基于PGD的训练方法时间开销很大，本文发现，可以利用FGSM和随机初始化结合达到与PGD相同的模型鲁棒性，并且时间开销更小。并且结合了一些传统的提高机器学习训练效率的方法进行性能提升。</p>
+<p><strong>Tips：</strong></p>
+<ul>
+<li>基于PGD的对抗训练方法<br><img src="dfl-2021-02-01-15-11-46.png" alt></li>
+<li>在本文之前，已经有基于FGSM的对抗训练方法提出，叫做“FREE” ADVERSARIAL TRAINING，但是虽然free方法要比基于PGD的更快，但是，还是还是没有达到本文的性能。perturbation没有两个minibatch之间进行重置。<br><img src="mk-![](mk-2021-02-07-22-21-58.png" alt>.png)</li>
+<li>本文的贡献：将FGSM和随机初始化结合，达到和PGD对抗训练相同的效果，并用了一些公开的加快训练速度的方法提升性能。<br>该工作可以看做是对free的一个改进，增加了随机初始化的步骤，因为没有理论能够证明在FGSM方法下，上一个minibatch得到的perturbation对于下一个minibatch来说是合理的。可以从伪代码看出，Uniform了一个随机扰动<br><img src="mk-2021-02-07-22-43-18.png" alt></li>
+</ul>
+<h2 id="Adversarial-Training-for-Free"><a href="#Adversarial-Training-for-Free" class="headerlink" title="Adversarial Training for Free!"></a>Adversarial Training for Free!</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/07/adversarial%20competition/adversarial%20competition/adversarial-competition/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
