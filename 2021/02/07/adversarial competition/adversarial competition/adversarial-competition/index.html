@@ -32,11 +32,11 @@
 <meta property="og:description" content="FAST IS BETTER THAN FREE: REVISITING ADVERSARIAL TRAINING摘要： 这篇文章提出了一种比基于PGD进行对抗训练更高效的方法，传统的基于PGD的训练方法时间开销很大，本文发现，可以利用FGSM和随机初始化结合达到与PGD相同的模型鲁棒性，并且时间开销更小。并且结合了一些传统的提高机器学习训练效率的方法进行性能提升。 Tips：  基于PGD的对抗">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/adversarial%20competition/adversarial%20competition/adversarial-competition/dfl-2021-02-01-15-11-46.png">
-<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/adversarial%20competition/adversarial%20competition/adversarial-competition/mk-![](mk-2021-02-07-22-21-58.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/adversarial%20competition/adversarial%20competition/adversarial-competition/mk-!%5B%5D(mk-2021-02-07-22-21-58.png).png">
 <meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/adversarial%20competition/adversarial%20competition/adversarial-competition/mk-2021-02-07-22-43-18.png">
 <meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/adversarial%20competition/adversarial%20competition/adversarial-competition/mk-2021-02-08-00-05-03.png">
 <meta property="article:published_time" content="2021-02-07T13:39:01.649Z">
-<meta property="article:modified_time" content="2021-02-07T16:20:38.104Z">
+<meta property="article:modified_time" content="2021-02-28T06:30:22.260Z">
 <meta property="article:author" content="Jiqiang Gao">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gaojiqiang.github.io/2021/02/07/adversarial%20competition/adversarial%20competition/adversarial-competition/dfl-2021-02-01-15-11-46.png">
@@ -212,7 +212,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FAST-IS-BETTER-THAN-FREE-REVISITING-ADVERSARIAL-TRAINING"><span class="nav-number">1.</span> <span class="nav-text">FAST IS BETTER THAN FREE: REVISITING ADVERSARIAL TRAINING</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adversarial-Training-for-Free"><span class="nav-number">2.</span> <span class="nav-text">Adversarial Training for Free!</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FAST-IS-BETTER-THAN-FREE-REVISITING-ADVERSARIAL-TRAINING"><span class="nav-number">1.</span> <span class="nav-text">FAST IS BETTER THAN FREE: REVISITING ADVERSARIAL TRAINING</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adversarial-Training-for-Free"><span class="nav-number">2.</span> <span class="nav-text">Adversarial Training for Free!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HYDRA-Pruning-Adversarially-Robust-Neural-Networks"><span class="nav-number">3.</span> <span class="nav-text">HYDRA: Pruning Adversarially Robust Neural Networks</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -315,7 +315,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-02-08 00:20:38" itemprop="dateModified" datetime="2021-02-08T00:20:38+08:00">2021-02-08</time>
+        <time title="Modified: 2021-02-28 14:30:22" itemprop="dateModified" datetime="2021-02-28T14:30:22+08:00">2021-02-28</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -340,12 +340,22 @@
         <h2 id="FAST-IS-BETTER-THAN-FREE-REVISITING-ADVERSARIAL-TRAINING"><a href="#FAST-IS-BETTER-THAN-FREE-REVISITING-ADVERSARIAL-TRAINING" class="headerlink" title="FAST IS BETTER THAN FREE: REVISITING ADVERSARIAL TRAINING"></a>FAST IS BETTER THAN FREE: REVISITING ADVERSARIAL TRAINING</h2><p><strong>摘要：</strong> 这篇文章提出了一种比基于PGD进行对抗训练更高效的方法，传统的基于PGD的训练方法时间开销很大，本文发现，可以利用FGSM和随机初始化结合达到与PGD相同的模型鲁棒性，并且时间开销更小。并且结合了一些传统的提高机器学习训练效率的方法进行性能提升。</p>
 <p><strong>Tips：</strong></p>
 <ul>
-<li>基于PGD的对抗训练方法<br><img src="dfl-2021-02-01-15-11-46.png" alt=""></li>
-<li>在本文之前，已经有基于FGSM的对抗训练方法提出，叫做“FREE” ADVERSARIAL TRAINING，但是虽然free方法要比基于PGD的更快，但是，还是还是没有达到本文的性能。perturbation没有两个minibatch之间进行重置。<br><img src="mk-![](mk-2021-02-07-22-21-58.png" alt="">.png)</li>
-<li>本文的贡献：将FGSM和随机初始化结合，达到和PGD对抗训练相同的效果，并用了一些公开的加快训练速度的方法提升性能。<br>该工作可以看做是对free的一个改进，增加了随机初始化的步骤，因为没有理论能够证明在FGSM方法下，上一个minibatch得到的perturbation对于下一个minibatch来说是合理的。可以从伪代码看出，Uniform了一个随机扰动<br><img src="mk-2021-02-07-22-43-18.png" alt=""></li>
+<li>基于PGD的对抗训练方法<br><img src="dfl-2021-02-01-15-11-46.png"></li>
+<li>在本文之前，已经有基于FGSM的对抗训练方法提出，叫做“FREE” ADVERSARIAL TRAINING，但是虽然free方法要比基于PGD的更快，但是，还是还是没有达到本文的性能。perturbation没有两个minibatch之间进行重置。<br><img src="mk-!%5B%5D(mk-2021-02-07-22-21-58.png).png"></li>
+<li>本文的贡献：将FGSM和随机初始化结合，达到和PGD对抗训练相同的效果，并用了一些公开的加快训练速度的方法提升性能。<br>该工作可以看做是对free的一个改进，增加了随机初始化的步骤，因为没有理论能够证明在FGSM方法下，上一个minibatch得到的perturbation对于下一个minibatch来说是合理的。可以从伪代码看出，Uniform了一个随机扰动<br><img src="mk-2021-02-07-22-43-18.png"></li>
 </ul>
-<h2 id="Adversarial-Training-for-Free"><a href="#Adversarial-Training-for-Free" class="headerlink" title="Adversarial Training for Free!"></a>Adversarial Training for Free!</h2><p><strong>摘要：</strong> 减少对抗训练所需要的时间开销并达到与PGD相同的鲁棒性。算法核心思想是使用一个同时backward pass的步骤，老更新模型参数和perturbation，而不是对每个更新步骤使用单独的梯度计算。</p>
-<p><img src="mk-2021-02-08-00-05-03.png" alt=""></p>
+<h2 id="Adversarial-Training-for-Free"><a href="#Adversarial-Training-for-Free" class="headerlink" title="Adversarial Training for Free!"></a>Adversarial Training for Free!</h2><p><strong>摘要：</strong> 减少对抗训练所需要的时间开销并达到与PGD相同的鲁棒性。算法核心思想是使用一个同步进行的backward pass的步骤，来更新模型参数和<br>perturbation，而不是对每个更新步骤使用单独的梯度计算。</p>
+<p><img src="mk-2021-02-08-00-05-03.png"></p>
+<h2 id="HYDRA-Pruning-Adversarially-Robust-Neural-Networks"><a href="#HYDRA-Pruning-Adversarially-Robust-Neural-Networks" class="headerlink" title="HYDRA: Pruning Adversarially Robust Neural Networks"></a>HYDRA: Pruning Adversarially Robust Neural Networks</h2><p><strong>摘要：</strong> 将网络剪枝和鲁棒训练结合起来进行研究，改进模型的鲁棒性往往会使得模型变的larger，因此本文提出使用剪枝技术来减小网络的规模，并保持模型的robustness。</p>
+<p><strong>Tips：</strong> </p>
+<ul>
+<li><p>提出了一种能够感知鲁棒目标的剪枝技术；</p>
+</li>
+<li><p>有一个结论是，在一个非鲁棒的网络中存在一个鲁棒的子网络；</p>
+</li>
+<li><p>What’s hidden in a randomly weighted neural network? 这篇引用指出一个网络存在一个准确率相似的子网络，子网络的结构和规模更小，借用这个思想本文想找出规模更小的鲁棒网络。</p>
+</li>
+</ul>
 
     </div>
 
@@ -364,7 +374,7 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/02/07/deepdetection/deep_detection/" rel="next" title="DeepFake检测">
+                <a href="/2021/02/07/deep_detection/deep_detection/" rel="next" title="DeepFake检测">
                   DeepFake检测 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>

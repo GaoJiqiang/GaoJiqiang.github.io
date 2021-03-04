@@ -27,24 +27,27 @@
   <meta name="description" content="DeepFake Dectection读完后的一些思考：  定义什么叫做fake视频，视频中只要出现fake换脸就定义为fake，不论换了多少个人或者换了多少帧。  检测大多是都是基于帧间的时序特征来建模。提取帧后当作伪造image检测来做。但是存在的问题是，视频中会存在多个人，一部分换脸一部分不换脸，对每一帧的分数做平均后会影响最终对视频的整体评判打分。  检测方法比较费算力和存储资源，模型很大">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DeepFake检测">
-<meta property="og:url" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/index.html">
+<meta property="og:url" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/index.html">
 <meta property="og:site_name" content="G Blog">
 <meta property="og:description" content="DeepFake Dectection读完后的一些思考：  定义什么叫做fake视频，视频中只要出现fake换脸就定义为fake，不论换了多少个人或者换了多少帧。  检测大多是都是基于帧间的时序特征来建模。提取帧后当作伪造image检测来做。但是存在的问题是，视频中会存在多个人，一部分换脸一部分不换脸，对每一帧的分数做平均后会影响最终对视频的整体评判打分。  检测方法比较费算力和存储资源，模型很大">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/dfl-2021-01-27-14-42-05.png">
-<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/dfl-2021-01-27-14-59-08.png">
-<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/dfl-2021-01-27-15-27-06.png">
-<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/dfl-2021-01-27-15-58-12.png">
-<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/dfl-2021-01-27-21-03-46.png">
-<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/dfl-2021-01-27-21-03-38.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/dfl-2021-01-27-14-42-05.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/dfl-2021-01-27-14-59-08.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/dfl-2021-01-27-15-27-06.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/dfl-2021-01-27-15-58-12.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/dfl-2021-01-27-21-03-46.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/dfl-2021-01-27-21-03-38.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/mk-2021-02-08-17-20-56.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/mk-2021-02-08-17-46-09.png">
+<meta property="og:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/mk-2021-02-08-16-45-00.png">
 <meta property="article:published_time" content="2021-02-07T13:39:09.186Z">
-<meta property="article:modified_time" content="2021-02-07T13:41:27.257Z">
+<meta property="article:modified_time" content="2021-02-08T09:55:30.384Z">
 <meta property="article:author" content="Jiqiang Gao">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/dfl-2021-01-27-14-42-05.png">
+<meta name="twitter:image" content="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/dfl-2021-01-27-14-42-05.png">
 
 
-<link rel="canonical" href="https://gaojiqiang.github.io/2021/02/07/deep_detection/">
+<link rel="canonical" href="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/">
 
 
 <script class="page-configurations">
@@ -214,7 +217,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DeepFake-Dectection"><span class="nav-number">1.</span> <span class="nav-text">DeepFake Dectection</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Evideo%E7%9A%84%E6%A3%80%E6%B5%8B"><span class="nav-number">1.1.</span> <span class="nav-text">基于video的检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deepfake-Video-Detection-Using-Recurrent-Neural-Networks-%EF%BC%882018%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">Deepfake Video Detection Using Recurrent Neural Networks （2018）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CVPR-2019-Recurrent-Convolutional-Strategies-for-Face-Manipulation-Detection-in-Videos"><span class="nav-number">1.1.2.</span> <span class="nav-text">[CVPR 2019] Recurrent Convolutional Strategies for Face Manipulation Detection in Videos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88CVPR-Workshops-2020%EF%BC%89Deepfakes-Detection-with-Automatic-Face-Weighting"><span class="nav-number">1.1.3.</span> <span class="nav-text">（CVPR Workshops 2020）Deepfakes Detection with Automatic Face Weighting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88MultiMedia-2020%EF%BC%89-Sharp-Multiple-Instance-Learning-for-DeepFake-Video-Detection-%E9%98%BF%E9%87%8C%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.4.</span> <span class="nav-text">（MultiMedia 2020） Sharp Multiple Instance Learning for DeepFake Video Detection 阿里方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arXiv-2018-ForensicTransfer-Weakly-supervised-Domain-Adaptation-for-Forgery-Detection"><span class="nav-number">1.1.5.</span> <span class="nav-text">[arXiv 2018] ForensicTransfer: Weakly-supervised Domain Adaptation for Forgery Detection</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DeepFake-Dectection"><span class="nav-number">1.</span> <span class="nav-text">DeepFake Dectection</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E6%9C%89%E7%9A%84%E4%BC%AA%E9%80%A0%E5%81%87%E8%84%B8%E7%9A%84%E6%89%8B%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">现有的伪造假脸的手法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E6%9C%89%E6%A3%80%E6%B5%8B%E6%96%B9%E6%B3%95%E7%9A%84%E4%B8%80%E4%BA%9B%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">现有检测方法的一些分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Evideo%E7%9A%84%E6%A3%80%E6%B5%8B"><span class="nav-number">1.3.</span> <span class="nav-text">基于video的检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Deepfake-Video-Detection-Using-Recurrent-Neural-Networks-%EF%BC%882018%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">Deepfake Video Detection Using Recurrent Neural Networks （2018）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CVPR-2019-Recurrent-Convolutional-Strategies-for-Face-Manipulation-Detection-in-Videos"><span class="nav-number">1.3.2.</span> <span class="nav-text">[CVPR 2019] Recurrent Convolutional Strategies for Face Manipulation Detection in Videos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88CVPR-Workshops-2020%EF%BC%89Deepfakes-Detection-with-Automatic-Face-Weighting"><span class="nav-number">1.3.3.</span> <span class="nav-text">（CVPR Workshops 2020）Deepfakes Detection with Automatic Face Weighting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%EF%BC%88MultiMedia-2020%EF%BC%89-Sharp-Multiple-Instance-Learning-for-DeepFake-Video-Detection-%E9%98%BF%E9%87%8C%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.4.</span> <span class="nav-text">（MultiMedia 2020） Sharp Multiple Instance Learning for DeepFake Video Detection 阿里方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arXiv-2018-ForensicTransfer-Weakly-supervised-Domain-Adaptation-for-Forgery-Detection"><span class="nav-number">1.3.5.</span> <span class="nav-text">[arXiv 2018] ForensicTransfer: Weakly-supervised Domain Adaptation for Forgery Detection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#In-Ictu-Oculi-Exposing-AI-Created-Fake-Videos-by-Detecting-Eye-Blinking-6-WIFS2018"><span class="nav-number">1.3.6.</span> <span class="nav-text">In Ictu Oculi: Exposing AI Created Fake Videos by Detecting Eye Blinking[6] (WIFS2018)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9video%E7%9A%84%E5%B8%A7%E5%86%85%E6%A3%80%E6%B5%8B%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">对video的帧内检测：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mesonet-a-compact-facial-video-forgery-detection-network-WIFS2018"><span class="nav-number">1.4.1.</span> <span class="nav-text">Mesonet: a compact facial video forgery detection network (WIFS2018)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exposing-DeepFake-Videos-By-Detecting-Face-Warping-Artifacts-CVPRW2019"><span class="nav-number">1.4.2.</span> <span class="nav-text">Exposing DeepFake Videos By Detecting Face Warping Artifacts(CVPRW2019)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Eimage%E7%9A%84%E7%AF%A1%E6%94%B9%E6%A3%80%E6%B5%8B"><span class="nav-number">1.5.</span> <span class="nav-text">基于image的篡改检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Two-Stream-Neural-Networks-for-Tampered-Face-Detection-3-CVPRW2017"><span class="nav-number">1.5.1.</span> <span class="nav-text">Two-Stream Neural Networks for Tampered Face Detection[3] (CVPRW2017)</span></a></li></ol></li></ol></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -286,7 +289,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://gaojiqiang.github.io/2021/02/07/deep_detection/">
+    <link itemprop="mainEntityOfPage" href="https://gaojiqiang.github.io/2021/02/07/deep_detection/deep_detection/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/icon.jpg">
@@ -309,9 +312,24 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-02-07 21:39:09 / Modified: 21:41:27" itemprop="dateCreated datePublished" datetime="2021-02-07T21:39:09+08:00">2021-02-07</time>
+      <time title="Created: 2021-02-07 21:39:09" itemprop="dateCreated datePublished" datetime="2021-02-07T21:39:09+08:00">2021-02-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-02-08 17:55:30" itemprop="dateModified" datetime="2021-02-08T17:55:30+08:00">2021-02-08</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/DeepFace-AI-Security/" itemprop="url" rel="index"><span itemprop="name">DeepFace, AI Security</span></a>
+        </span>
     </span>
 
   
@@ -336,11 +354,25 @@
 </li>
 <li><p>为了避免针对每一帧都进行检测，能否将一段时间的视频帧融合求一个特征？来判断这一段时间内是否是fake。</p>
 </li>
-<li><p>git上的一些检测论文note：<a target="_blank" rel="noopener" href="https://github.com/592McAvoy/fake-face-detection/blob/master/detectmd#arxiv-2018-forensictransfer-weakly-supervised-domain-adaptation-for-forgery-detection">https://github.com/592McAvoy/fake-face-detection/blob/master/detectmd#arxiv-2018-forensictransfer-weakly-supervised-domain-adaptation-for-forgery-detection</a></p>
+<li><p>git上的一些检测论文note：<a target="_blank" rel="noopener" href="https://github.com/592McAvoy/fake-face-detection/blob/master/detect.md#cvpr-2019-recurrent-convolutional-strategies-for-face-manipulation-detection-in-videos">https://github.com/592McAvoy/fake-face-detection/blob/master/detect.md#cvpr-2019-recurrent-convolutional-strategies-for-face-manipulation-detection-in-videos</a></p>
 </li>
 </ul>
+<h2 id="现有的伪造假脸的手法"><a href="#现有的伪造假脸的手法" class="headerlink" title="现有的伪造假脸的手法"></a>现有的伪造假脸的手法</h2><ul>
+<li>Entire face synthesis：全脸合成，类似于直接用GAN或其他生成模型生成人脸，没有明确的target</li>
+<li>Face indentify swap：也就是deepfake，有target</li>
+<li>Face attributes manipulation：面部属性操作，例如更改人的发型、是否戴眼镜等，没有target</li>
+<li>Face expression manipulation：面部表情迁移，有target</li>
+</ul>
+<h2 id="现有检测方法的一些分类"><a href="#现有检测方法的一些分类" class="headerlink" title="现有检测方法的一些分类"></a>现有检测方法的一些分类</h2><ul>
+<li>Special Artifact-Based：基于一些deepfake引起的特殊异常现象，如眨眼、头部摆动、光流等等；</li>
+<li>CNN+RNN-Based：CNN做特征提取，RNN做时序模型，针对fake video的检测；</li>
+<li>Two Stream：双流模型做篡改检测；</li>
+<li>Auto-encoder：做特征压缩latent，为了更好的将检测方法迁移泛化到未知的攻击方法上；</li>
+<li>Frequency Domain：对image做DFT变换，映射到频域找特征信息进行分类；</li>
+<li>Novel Network or Module：一些新奇的网络结构和模块；</li>
+</ul>
 <h2 id="基于video的检测"><a href="#基于video的检测" class="headerlink" title="基于video的检测"></a>基于video的检测</h2><blockquote>
-<p>总体流程大致相似，先将视频转为帧，然后用CNN特征提取，再用RNN做时序建模。缺点是帧级标注成本较高，过多关注时序建模。都是在堆模型。</p>
+<p>总体流程大致相似，先将视频转为帧，然后用CNN特征提取，再用RNN做时序建模。缺点是帧级标注成本较高，过多关注时序建模。都是在堆模型。利用<strong>帧间时间特性</strong>或<strong>帧内人为视觉效果</strong>。</p>
 </blockquote>
 <h3 id="Deepfake-Video-Detection-Using-Recurrent-Neural-Networks-（2018）"><a href="#Deepfake-Video-Detection-Using-Recurrent-Neural-Networks-（2018）" class="headerlink" title="Deepfake Video Detection Using Recurrent Neural Networks （2018）"></a><em>Deepfake Video Detection Using Recurrent Neural Networks （2018）</em></h3><p><strong>摘要：</strong> 使用CNN去提取帧（frame）级别的特征，然后训练一个RNN去做判别器。</p>
 <p><strong>检测思想：</strong> 由于deepfake是一帧一帧的进行替换，因此当前帧的替换并不会考虑上一帧的结果，这种时序上关联的缺失会造成一些异常现象，比如脸部替换区域的闪动，尽管这些异常现象对人眼来说不那么明显，但是会被pixel-level的CNN捕捉到，生成的视频会有不正确的<strong>颜色恒常性</strong>。</p>
@@ -362,6 +394,21 @@
 <p><img src="dfl-2021-01-27-21-03-46.png"></p>
 <p><strong>检测流程：</strong> </p>
 <p><img src="dfl-2021-01-27-21-03-38.png"></p>
+<h3 id="In-Ictu-Oculi-Exposing-AI-Created-Fake-Videos-by-Detecting-Eye-Blinking-6-WIFS2018"><a href="#In-Ictu-Oculi-Exposing-AI-Created-Fake-Videos-by-Detecting-Eye-Blinking-6-WIFS2018" class="headerlink" title="In Ictu Oculi: Exposing AI Created Fake Videos by Detecting Eye Blinking[6] (WIFS2018)"></a><em>In Ictu Oculi: Exposing AI Created Fake Videos by Detecting Eye Blinking[6] (WIFS2018)</em></h3><p><strong>摘要：</strong> 基于deepfakes合成视频的训练样本很少闭眼的数据，通过视频人脸的检测眨眼频率来判别。</p>
+<p><strong>缺点：</strong> 虽然是一个deepfake比较普遍存在的生物信息，但是攻击者可以在后期进行处理或使用更先进的模型来实现更加自然的眨眼效果，因此长远来看并不适用。</p>
+<p><img src="mk-2021-02-08-17-20-56.png"></p>
+<h2 id="对video的帧内检测："><a href="#对video的帧内检测：" class="headerlink" title="对video的帧内检测："></a>对video的帧内检测：</h2><h3 id="Mesonet-a-compact-facial-video-forgery-detection-network-WIFS2018"><a href="#Mesonet-a-compact-facial-video-forgery-detection-network-WIFS2018" class="headerlink" title="Mesonet: a compact facial video forgery detection network (WIFS2018)"></a><em>Mesonet: a compact facial video forgery detection network (WIFS2018)</em></h3><p><strong>摘要：</strong>由于在有限的编码空间里数据被压缩，所以结果常常显得模糊，一些帧最终可能没有实现面部重现，而是被一块模糊或双重面部轮廓所呈现出来。</p>
+<p><strong>检测方法：</strong>提出了一种只有很少层的神经网络的中层方法，抽取中层语义进行判断，发现眼睛、鼻子、嘴巴之类的区域对判断有明显的作用。</p>
+<h3 id="Exposing-DeepFake-Videos-By-Detecting-Face-Warping-Artifacts-CVPRW2019"><a href="#Exposing-DeepFake-Videos-By-Detecting-Face-Warping-Artifacts-CVPRW2019" class="headerlink" title="Exposing DeepFake Videos By Detecting Face Warping Artifacts(CVPRW2019)"></a><em>Exposing DeepFake Videos By Detecting Face Warping Artifacts(CVPRW2019)</em></h3><p><strong>摘要：</strong> DeepFake算法只能合成有限分辨率的人脸图像，并且必须对其进行仿射变换以匹配源人脸的配置。由于扭曲面区域和周围环境的分辨率不一致，这种扭曲在生成的Deepfales视频中留下了独特的伪影（artifacts），这些伪影可以被经典的深度神经网络模型（如VGG，ResNet等）有效捕获。</p>
+<p><strong>检测方法：</strong> </p>
+<ul>
+<li>使用图像预处理方法生成负样本而不使用depfake生产，减少时间消耗以及避免过拟合</li>
+<li>训练4个CNN</li>
+</ul>
+<p><img src="mk-2021-02-08-17-46-09.png"></p>
+<h2 id="基于image的篡改检测"><a href="#基于image的篡改检测" class="headerlink" title="基于image的篡改检测"></a>基于image的篡改检测</h2><h3 id="Two-Stream-Neural-Networks-for-Tampered-Face-Detection-3-CVPRW2017"><a href="#Two-Stream-Neural-Networks-for-Tampered-Face-Detection-3-CVPRW2017" class="headerlink" title="Two-Stream Neural Networks for Tampered Face Detection[3] (CVPRW2017)"></a><em>Two-Stream Neural Networks for Tampered Face Detection[3] (CVPRW2017)</em></h3><p><strong>摘要：</strong>利用双流网络结构来捕获<strong>high-level的篡改伪迹</strong>证据和<strong>low-level的局部噪声残差</strong>证据。</p>
+<p><strong>检测流程：</strong>一个stram提取脸部特征直接训一个二分类器，一个stream提取基于patch level的隐藏特征，期望捕获到类似CFA模式或局部噪声残差之类的low-level的相机特征。和PS检测使用的双流模型是一个思想。</p>
+<p><img src="mk-2021-02-08-16-45-00.png"></p>
 
     </div>
 
@@ -375,11 +422,14 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/02/07/deepdetection/deep_detection/" rel="prev" title="DeepFake检测">
-                  <i class="fa fa-chevron-left"></i> DeepFake检测
+                <a href="/2021/02/07/adversarial%20competition/adversarial%20competition/adversarial-competition/" rel="prev" title="天池对抗鲁棒">
+                  <i class="fa fa-chevron-left"></i> 天池对抗鲁棒
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2021/02/28/gradient_leakage/gradient_leakage/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
